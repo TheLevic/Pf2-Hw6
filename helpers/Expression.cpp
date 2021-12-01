@@ -98,3 +98,38 @@ void Expression::evaluateInfix(vector<Token> a){
 	//Need to get the first int, then the operator, and then the second int.
 	
 }
+
+vector<Token> Expression::infixToPostfix(){
+	if (!postfix.empty()){
+		postfix.clear();
+	}
+	for (int i = 0; i < tokenized.size(); i++){
+		if (type == Identifier || type == Integer){
+			postfix.push_back(tokenized.at(i).get_token());
+		}
+		else if (type == OpenBrace){
+			stack.push(tokenized.at(i).get_token());
+		}
+		else if (type == CloseBrace){
+			while (stack.top().get_type() != OpenBrace){
+				int i = 0;
+				postfix.push_back(stack.top());
+				stack.pop();
+			}
+			stack.pop();
+		}
+		else{ //Operators
+			int i = 0;
+			while (!stack.empty() && stack.top().get_priority() >= tokenized.at(i).get_priority()){
+				postfix.push_back(stack.top());
+				stack.pop();
+				++i;
+			}
+			stack.push(tokenized.at(i));
+		}
+		while (!stack.empty()){
+			postfix.push_back(stack.top());
+			stack.pop();
+		}
+	}
+}
