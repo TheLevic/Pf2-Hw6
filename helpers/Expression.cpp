@@ -47,22 +47,6 @@ void Expression::set(const string& s)
 	if(track != "")
 		tokenized.push_back(Token(track));
 
-
-// 	for(int i=0; i<s.length(); i++)
-// 	{
-// 		//if s[i] is empty " " s[i] == " "
-// 			// do something with token you had earlier tokenized.push_back(token)
-//			//if track was empty, continue;
-// 			// track = empty, track = "";
-// 		//if special token (s[i] == "+" || - || * || / || ( || ) || =)
-// 			// stop the  track variable you had earlier and add that to vector
-// 			// add the operator, (), or = to vector
-// 		 	// set track empty
-// 		//else
-// 			// letter or number, other
-// 			// += add that stuff to the track variable 
-// 		tokenized.push_back(track variable);
-
 	valid = false;
 	type = Bad;
 }
@@ -110,3 +94,7 @@ vector<Token> Expression::get_tokenized() const
 	return tokenized;
 }
 
+void Expression::evaluateInfix(vector<Token> a){
+	//Need to get the first int, then the operator, and then the second int.
+	
+}

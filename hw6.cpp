@@ -12,14 +12,38 @@
 using namespace std;
 
 void interactive(){
+    //Declarations
     string input;
+    bool out; //Bool to get correct expression
+
+    //Main Loop
     while (1){
         cout << "input:";
         getline(cin, input);
+        do
+            {
+                //Need to make sure it starts with num or letter
+                //Need to make sure that the expression is separated by ; properly
+                //Need to make sure that it ends with ;
+                if (isdigit(input[0]) || isalpha(input[0])){ //Update this loop later (or make a check method)
+                    out = true;
+                }
+                else{
+                    out = false;
+                    cout << "Incorrect input. Please input a valid expression." << endl;
+                    input.clear();
+                    getline(cin, input);
+                }
+            } while (out == false);
+
+
+
         //cout << "Echo input : in quote " << "\"" << input << "\"" << endl;
         while (1) {
             cout << "action:";
             getline(cin, input);
+            
+            
             //cout << "Echo action : in quote " << "\"" << input << "\"" << endl;
             if (input.size() == 1 && input[0] == 'q'){
                 return;
