@@ -8,18 +8,22 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-
+#include "helpers/Expression.h"
+#include "helpers/Token.h"
 using namespace std;
 
 void interactive(){
     //Declarations
     string input;
+    string input2;
     bool out; //Bool to get correct expression
 
     //Main Loop
     while (1){
         cout << "input:";
         getline(cin, input);
+        Expression expression;
+        expression.set(input);
         do
             {
                 //Need to make sure it starts with num or letter
@@ -41,30 +45,35 @@ void interactive(){
         //cout << "Echo input : in quote " << "\"" << input << "\"" << endl;
         while (1) {
             cout << "action:";
-            getline(cin, input);
+            getline(cin, input2);
             
             
             //cout << "Echo action : in quote " << "\"" << input << "\"" << endl;
-            if (input.size() == 1 && input[0] == 'q'){
+            if (input2.size() == 1 && input2[0] == 'q'){ //Done
                 return;
             }
-            else if (input.size() == 1 && input[0] == 'c'){
+            else if (input2.size() == 1 && input2[0] == 'c'){ //Done
                 break;
             }
-            else if (input.size() == 1 && input[0] == 's'){
-                cout << "Insert method here to clear our working tree" << endl;
+            else if (input2.size() == 1 && input2[0] == 's'){ //Done
+                cout << "Starting fresh!" << endl;
+                expression.clearWorkingTree();
+                break;
             }
-            else if(input.size() == 1 && input[0] == 'f'){
+            else if(input2.size() == 1 && input2[0] == 'f'){
                 cout << "Insert method here to fully parenthesize expression" << endl;
             }
-            else if(input.size() == 1 && input[0] == '='){
+            else if(input2.size() == 1 && input2[0] == '='){
                 cout << "Insert method to actually evaluate each expression" << endl;
             }
-            else if(input.size() == 1 && input[0] == '>'){
+            else if(input2.size() == 1 && input2[0] == '>'){
                 cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent prefix expression" << endl;
             }
-            else if (input.size() == 1 && input[0] == '<'){
-                cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent postfix expression." << endl;
+            else if (input2.size() == 1 && input2[0] == '<'){ //Almost done. Not sure what the error is.
+                expression.ToPostfix();
+                expression.displayPostfix();
+                cout << endl;
+                //cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent postfix expression." << endl;
             }
             else{ //Covers all other input possible. Only inputs that will actually run methods are the ones listed above
                 cout << "Invalid input. Please try again." << endl;

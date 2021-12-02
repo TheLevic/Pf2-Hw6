@@ -60,7 +60,8 @@ void Expression::display() const
 	}
 	cout << endl;
 	cout << "number of tokens = " << tokenized.size() << endl;
-	cout << "postfix = " << endl;
+	cout << "postfix = ";
+	cout << endl;
 	string validName;
 	if(valid==false)
 		validName = "false";
@@ -99,20 +100,16 @@ void Expression::evaluateInfix(vector<Token> a){
 	
 }
 
-vector<Token> Expression::infixToPostfix(){
-	if (!postfix.empty()){
-		postfix.clear();
-	}
+vector<Token> Expression::ToPostfix(){ //Not completely working yet
 	for (int i = 0; i < tokenized.size(); i++){
-		if (type == Identifier || type == Integer){
+		if (tokenized.at(i).get_type() == Identifier || tokenized.at(i).get_type() == Integer){
 			postfix.push_back(tokenized.at(i).get_token());
 		}
-		else if (type == OpenBrace){
+		else if (tokenized.at(i).get_type() == OpenBrace){
 			stack.push(tokenized.at(i).get_token());
 		}
-		else if (type == CloseBrace){
+		else if (tokenized.at(i).get_type() == CloseBrace){
 			while (stack.top().get_type() != OpenBrace){
-				int i = 0;
 				postfix.push_back(stack.top());
 				stack.pop();
 			}
@@ -132,4 +129,17 @@ vector<Token> Expression::infixToPostfix(){
 			stack.pop();
 		}
 	}
+	return postfix;
+}
+
+void Expression::displayPostfix(){
+	for (int i = 0; i < postfix.size(); i++){
+		cout << postfix.at(i).get_token();
+	}
+}
+
+void Expression::clearWorkingTree(){
+	tokenized.clear();
+	original.clear();
+	postfix.clear();
 }
