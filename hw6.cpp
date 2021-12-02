@@ -61,13 +61,13 @@ void interactive(){
                 break;
             }
             else if(input2.size() == 1 && input2[0] == 'f'){
-                cout << "Insert method here to fully parenthesize expression" << endl;
+                cout << "Insert method here to fully parenthesize expression" << endl; //Confused
             }
             else if(input2.size() == 1 && input2[0] == '='){
-                cout << "Insert method to actually evaluate each expression" << endl;
+                cout << "Insert method to actually evaluate each expression" << endl; //Very confused
             }
             else if(input2.size() == 1 && input2[0] == '>'){
-                cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent prefix expression" << endl;
+                cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent prefix expression" << endl; //Shouldn't be too bad now that i've got postfix done
             }
             else if (input2.size() == 1 && input2[0] == '<'){ //Almost done. Not sure what the error is.
                 expression.ToPostfix();
