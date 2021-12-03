@@ -52,7 +52,7 @@ void interactive(){
             if (input2.size() == 1 && input2[0] == 'q'){ //Done
                 return;
             }
-            else if (input2.size() == 1 && input2[0] == 'c'){ //Done
+            else if (input2.size() == 1 && input2[0] == 'c'){ //Done?
                 break;
             }
             else if (input2.size() == 1 && input2[0] == 's'){ //Done

@@ -28,6 +28,7 @@ public:
     //Need to evaluate infix expression (human like input)
     void evaluateInfix(vector<Token> a);
     vector<Token> ToPostfix();
+    vector<Token> ToInfix();
     void clearWorkingTree();
     void displayPostfix();
     
