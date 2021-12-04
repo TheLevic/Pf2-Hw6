@@ -96,12 +96,16 @@ vector<Token> Expression::get_tokenized() const
 
 void Expression::toPostfix(){ //Not completely working yet
 	for (int i = 0; i < tokenized.size(); i++){ //For each token in tokenized
+
+		//Check to see if it is a number or letter
 		if (tokenized.at(i).get_type() == Identifier || tokenized.at(i).get_type() == Integer){
 			postfix.push_back(tokenized.at(i).get_token());
 		}
+		//Check to see if it's an openbrace
 		else if (tokenized.at(i).get_type() == OpenBrace){
 			stack.push(tokenized.at(i));
 		}
+		//Check to see if it is a closebrace
 		else if (tokenized.at(i).get_type() == CloseBrace){
 			while (stack.top().get_type() != OpenBrace){
 				postfix.push_back(stack.top());
@@ -124,11 +128,24 @@ void Expression::toPostfix(){ //Not completely working yet
 
 }
 
+void Expression::toInfix(){
+	toPostfix();
+	reverse(postfix.begin(), postfix.end());
+	infix = postfix;
+}
+
 
 void Expression::displayPostfix(){
 	cout << "Your postfix expression is: ";
 	for (int i = 0; i < postfix.size(); i++){
 		cout << postfix.at(i).get_token();
+	}
+	cout << endl;
+}
+void Expression::displayInfix(){
+	cout << "Your infix expression is: ";
+	for (int i = 0; i < infix.size(); i++){
+		cout << infix.at(i).get_token();
 	}
 	cout << endl;
 }

@@ -67,7 +67,9 @@ void interactive(){
                 cout << "Insert method to actually evaluate each expression" << endl; //Very confused
             }
             else if(input2.size() == 1 && input2[0] == '>'){
-                cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent prefix expression" << endl; //Shouldn't be too bad now that i've got postfix done
+                // cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent prefix expression" << endl; //Shouldn't be too bad now that i've got postfix done
+                expression.toInfix();
+                expression.displayInfix();
             }
             else if (input2.size() == 1 && input2[0] == '<'){ //Working. ; char is messing up my postfix expression though.
                 cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent postfix expression." << endl;

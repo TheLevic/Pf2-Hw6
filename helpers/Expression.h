@@ -26,8 +26,10 @@ public:
     vector<Token> get_tokenized() const; //Done
     
     void toPostfix();
+    void toInfix();
     void clearWorkingTree();
     void displayPostfix();
+    void displayInfix();
     
     
     
@@ -39,6 +41,7 @@ private:
     string original;
     vector<Token> tokenized; //Infix
     vector<Token> postfix;
+    vector<Token> infix;
     bool valid;
     Exp_type type;
     stack<Token> stack;
