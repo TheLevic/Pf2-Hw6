@@ -14,8 +14,8 @@ using namespace std;
 
 void interactive(){
     //Declarations
-    string input;
-    string input2;
+    string input; //Users expressions
+    string input2; //Users action
     bool out; //Bool to get correct expression
 
     //Main Loop
@@ -70,10 +70,10 @@ void interactive(){
                 cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent prefix expression" << endl; //Shouldn't be too bad now that i've got postfix done
             }
             else if (input2.size() == 1 && input2[0] == '<'){ //Almost done. Not sure what the error is.
-                expression.ToPostfix();
+                cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent postfix expression." << endl;
+                expression.set(input2);
+                expression.toPostfix();
                 expression.displayPostfix();
-                cout << endl;
-                //cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent postfix expression." << endl;
             }
             else{ //Covers all other input possible. Only inputs that will actually run methods are the ones listed above
                 cout << "Invalid input. Please try again." << endl;

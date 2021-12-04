@@ -94,49 +94,43 @@ vector<Token> Expression::get_tokenized() const
 	return tokenized;
 }
 
-void Expression::evaluateInfix(vector<Token> a){
-	//Need to get the first int, then the operator, and then the second int.
-	
-}
-
-vector<Token> Expression::ToPostfix(){ //Not completely working yet
-		postfix.clear();
-		for (int i = 0; i < tokenized.size(); i++){
-			if (tokenized.at(i).get_type() == Identifier || tokenized.at(i).get_type() == Integer){
-				postfix.push_back(tokenized.at(i).get_token());
-			}
-			else if (tokenized.at(i).get_type() == OpenBrace){
-				stack.push(tokenized.at(i).get_token());
-			}
-			else if (tokenized.at(i).get_type() == CloseBrace){
-				while (stack.top().get_type() != OpenBrace){
-					postfix.push_back(stack.top());
-					stack.pop();
-				}
-				stack.pop();
-			}
-			else{ //Operators
-				int i = 0;
-				while (!stack.empty() && stack.top().get_priority() >= tokenized.at(i).get_priority()){
-					postfix.push_back(stack.top());
-					stack.pop();
-					++i;
-				}
-				stack.push(tokenized.at(i));
-			}
-			while (!stack.empty()){
+void Expression::toPostfix(){ //Not completely working yet
+	for (int i = 0; i < tokenized.size() - 1; i++){ //For each token in tokenized
+		if (tokenized.at(i).get_type() == Identifier || tokenized.at(i).get_type() == Integer){
+			postfix.push_back(tokenized.at(i).get_token());
+		}
+		else if (tokenized.at(i).get_type() == OpenBrace){
+			stack.push(tokenized.at(i));
+		}
+		else if (tokenized.at(i).get_type() == CloseBrace){
+			while (stack.top().get_type() != OpenBrace){
 				postfix.push_back(stack.top());
 				stack.pop();
 			}
+			stack.pop(); //Gets rid of the openbrace
 		}
-		return postfix;
+		else{ //Operator case
+			while (!stack.empty() && stack.top().get_priority() >= tokenized.at(i).get_priority()){
+				postfix.push_back(stack.top());
+				stack.pop();
+			}
+			stack.push(tokenized.at(i).get_token());
+		}
 	}
+	while (!stack.empty()){
+		postfix.push_back(stack.top());
+		stack.pop();
+	}
+
+}
 
 
 void Expression::displayPostfix(){
+	cout << "Your postfix expression is: ";
 	for (int i = 0; i < postfix.size(); i++){
 		cout << postfix.at(i).get_token();
 	}
+	cout << endl;
 }
 
 void Expression::clearWorkingTree(){

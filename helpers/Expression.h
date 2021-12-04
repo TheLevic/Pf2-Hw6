@@ -25,10 +25,7 @@ public:
     string getoriginal() const;  //Done
     vector<Token> get_tokenized() const; //Done
     
-    //Need to evaluate infix expression (human like input)
-    void evaluateInfix(vector<Token> a);
-    vector<Token> ToPostfix();
-    vector<Token> ToInfix();
+    void toPostfix();
     void clearWorkingTree();
     void displayPostfix();
     
