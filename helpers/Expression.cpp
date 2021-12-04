@@ -95,7 +95,7 @@ vector<Token> Expression::get_tokenized() const
 }
 
 void Expression::toPostfix(){ //Not completely working yet
-	for (int i = 0; i < tokenized.size() - 1; i++){ //For each token in tokenized
+	for (int i = 0; i < tokenized.size(); i++){ //For each token in tokenized
 		if (tokenized.at(i).get_type() == Identifier || tokenized.at(i).get_type() == Integer){
 			postfix.push_back(tokenized.at(i).get_token());
 		}
