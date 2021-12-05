@@ -55,9 +55,9 @@ void interactive(){
                 return;
             }
             else if (input2.size() == 1 && input2[0] == 'c'){ //How do I get this to add to the expression instead of starting over?
-                // getline(cin, input);
-                // expression.addToExpression(input);
-                // expression.display();
+                getline(cin, input);
+                expression.addToExpression(input);
+                expression.display();
 
             }
             else if (input2.size() == 1 && input2[0] == 's'){ //Done
@@ -77,7 +77,6 @@ void interactive(){
                 expression.displayInfix();
             }
             else if (input2.size() == 1 && input2[0] == '<'){ //Working. ; char is messing up my postfix expression though.
-                cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent postfix expression." << endl;
                 expression.toPostfix();
                 expression.displayPostfix();
             }
