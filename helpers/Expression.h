@@ -43,7 +43,8 @@ private:
     bool valid;
     Exp_type type;
     stack<Token> stack;
-    map<Token, int> mp;
+    map<Token, Token> mp;
+    
 
 
 };
