@@ -168,3 +168,71 @@ void Expression::addToExpression(const string input){
 	cout << tmp << endl;
 	set(tmp);
 }
+
+void Expression::syntaxCheck(Expression input){
+	enum States {expect_operand, expect_operator, done};
+	bool eq = false; //We will set this to true if we encounter an equal sign
+	States state = expect_operand;
+	int pcount = 0;
+	valid = true; 
+	int i = 0; //Make sure we don't go past the last token
+	while (state != done && i < tokenized.size()){
+		Token t = tokenized.at(i);
+		switch (state){
+			case expect_operand:
+				if (t.get_type() == OpenBrace){
+					pcount++;
+				}
+				else if (t.get_type() == Integer || t.get_type() == Identifier){
+					state = expect_operator;
+				}
+				else{
+					valid = false;
+					state = done;
+				}
+				break;
+			case expect_operator:
+				if (t.get_type() == CloseBrace){
+					pcount--;
+					if (pcount < 0){
+						valid = false;
+						state = done;
+					}
+				}
+				else if (t.get_type() == EqualSign){
+					eq = true;
+					state = expect_operand;
+				}
+				else if (t.get_type() == Operators){
+					state = expect_operand;
+				}
+				else{
+					valid = false;
+					state = done;
+				}
+			default:
+				break;
+		}
+	}
+	if (pcount != 0){
+		valid = false;
+	}
+	if (state = expect_operand){
+		valid = false;
+	}
+	if (valid){
+		if  (eq){
+			if (tokenized.size() == 3 && tokenized.at(0).get_type() == Identifier && tokenized.at(2).get_type() == Integer){
+				type = Assignment;
+				//Need to add code to actually assign variable with number (Symbol table or array?)
+			}
+			else{
+				valid = false;
+			}
+		}
+		else{
+			type = Arithmetic;
+			input.toPostfix();
+		}
+	}
+}

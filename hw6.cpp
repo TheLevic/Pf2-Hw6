@@ -54,7 +54,7 @@ void interactive(){
             if (input2.size() == 1 && input2[0] == 'q'){ //Done
                 return;
             }
-            else if (input2.size() == 1 && input2[0] == 'c'){ //How do I get this to add to the expression instead of starting over?
+            else if (input2.size() == 1 && input2[0] == 'c'){ //Able to add to expression. Need to postfix one at a time though. Need to separate these somehow.
                 getline(cin, input);
                 expression.addToExpression(input);
                 expression.display();
@@ -71,12 +71,11 @@ void interactive(){
             else if(input2.size() == 1 && input2[0] == '='){
                 cout << "Insert method to actually evaluate each expression" << endl; //Very confused
             }
-            else if(input2.size() == 1 && input2[0] == '>'){
-                // cout << "Insert method here to convert each expression in the sequence of expressions to the equivalent prefix expression" << endl; //Shouldn't be too bad now that i've got postfix done
+            else if(input2.size() == 1 && input2[0] == '>'){ //Working
                 expression.toInfix();
                 expression.displayInfix();
             }
-            else if (input2.size() == 1 && input2[0] == '<'){ //Working. ; char is messing up my postfix expression though.
+            else if (input2.size() == 1 && input2[0] == '<'){ //Working
                 expression.toPostfix();
                 expression.displayPostfix();
             }
@@ -87,9 +86,7 @@ void interactive(){
     }
 }
 
-/*
- * 
- */
+
 int main(int argc, char** argv) {
     cout << "=== expression evaluation program starts ===" << endl;
     interactive();

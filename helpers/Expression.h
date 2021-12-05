@@ -31,6 +31,7 @@ public:
     void displayPostfix();
     void displayInfix();
     void addToExpression(const string input);
+    void syntaxCheck(Expression input);
 
 private:
     string original;
