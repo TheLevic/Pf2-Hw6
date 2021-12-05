@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include <stack>
+#include <map>
 using namespace std;
 
 enum Exp_type {Assignment, Arithmetic, Bad};
@@ -32,6 +33,7 @@ public:
     void displayInfix();
     void addToExpression(const string input);
     void syntaxCheck(Expression input);
+    void evaluateExpression();
 
 private:
     string original;
@@ -41,6 +43,7 @@ private:
     bool valid;
     Exp_type type;
     stack<Token> stack;
+    map<Token, int> mp;
 
 
 };

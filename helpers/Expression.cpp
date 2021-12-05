@@ -224,7 +224,8 @@ void Expression::syntaxCheck(Expression input){
 		if  (eq){
 			if (tokenized.size() == 3 && tokenized.at(0).get_type() == Identifier && tokenized.at(2).get_type() == Integer){
 				type = Assignment;
-				//Need to add code to actually assign variable with number (Symbol table or array?)
+				//Need to use maps here somehow
+				
 			}
 			else{
 				valid = false;
@@ -235,4 +236,8 @@ void Expression::syntaxCheck(Expression input){
 			input.toPostfix();
 		}
 	}
+}
+
+void Expression::evaluateExpression(){
+	
 }
