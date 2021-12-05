@@ -24,6 +24,8 @@ void interactive(){
         getline(cin, input);
         Expression expression;
         expression.set(input);
+        expression.display();
+        
         do
             {
                 //Need to make sure it starts with num or letter
@@ -52,8 +54,11 @@ void interactive(){
             if (input2.size() == 1 && input2[0] == 'q'){ //Done
                 return;
             }
-            else if (input2.size() == 1 && input2[0] == 'c'){ //Done?
-                break;
+            else if (input2.size() == 1 && input2[0] == 'c'){ //How do I get this to add to the expression instead of starting over?
+                // getline(cin, input);
+                // expression.addToExpression(input);
+                // expression.display();
+
             }
             else if (input2.size() == 1 && input2[0] == 's'){ //Done
                 cout << "Starting fresh!" << endl;
@@ -77,7 +82,7 @@ void interactive(){
                 expression.displayPostfix();
             }
             else{ //Covers all other input possible. Only inputs that will actually run methods are the ones listed above
-                cout << "Invalid input. Please try again." << endl;
+                cout << "Wrong input for the action! Please type one of =, <, >, f(F), q(Q), c(C), s(S)" << endl;
             }
         }
     }

@@ -37,6 +37,9 @@ void Expression::set(const string& s)
 			tokenized.push_back(Token(track));
 			track = "";
 		}
+		else if (s[i] == ';'){
+			continue;
+		}
 		else
 		{
 			track += s[i];
@@ -95,6 +98,7 @@ vector<Token> Expression::get_tokenized() const
 }
 
 void Expression::toPostfix(){ //Not completely working yet
+	postfix.clear();
 	for (int i = 0; i < tokenized.size(); i++){ //For each token in tokenized
 
 		//Check to see if it is a number or letter
@@ -129,6 +133,8 @@ void Expression::toPostfix(){ //Not completely working yet
 }
 
 void Expression::toInfix(){
+	postfix.clear();
+	infix.clear();
 	toPostfix();
 	reverse(postfix.begin(), postfix.end());
 	infix = postfix;
@@ -154,4 +160,11 @@ void Expression::clearWorkingTree(){
 	tokenized.clear();
 	original.clear();
 	postfix.clear();
+}
+
+void Expression::addToExpression(const string input){
+	tokenized.clear();
+	string tmp = original + input;
+	cout << tmp << endl;
+	set(tmp);
 }

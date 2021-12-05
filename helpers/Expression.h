@@ -30,12 +30,7 @@ public:
     void clearWorkingTree();
     void displayPostfix();
     void displayInfix();
-    
-    
-    
-
-
-
+    void addToExpression(const string input);
 
 private:
     string original;
@@ -45,7 +40,6 @@ private:
     bool valid;
     Exp_type type;
     stack<Token> stack;
-    //int numTokens;
 
 
 };
