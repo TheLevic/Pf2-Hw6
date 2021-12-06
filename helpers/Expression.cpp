@@ -224,6 +224,8 @@ void Expression::syntaxCheck(Expression input){
 		if  (eq){
 			if (tokenized.size() == 3 && tokenized.at(0).get_type() == Identifier && tokenized.at(2).get_type() == Integer){
 				type = Assignment;
+				//Need to use maps here somehow
+				}
 			}
 			else{
 				valid = false;
@@ -233,8 +235,9 @@ void Expression::syntaxCheck(Expression input){
 			type = Arithmetic;
 			input.toPostfix();
 		}
-	}
 }
 
+
 void Expression::evaluateExpression(){	
+	//Not sure how to do this.
 }
