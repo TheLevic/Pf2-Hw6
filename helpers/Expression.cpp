@@ -169,7 +169,7 @@ void Expression::addToExpression(const string input){
 	set(tmp);
 }
 
-void Expression::syntaxCheck(Expression input){
+void Expression::syntaxCheck(){
 	enum States {expect_operand, expect_operator, done};
 	bool eq = false; //We will set this to true if we encounter an equal sign
 	States state = expect_operand;
@@ -224,20 +224,31 @@ void Expression::syntaxCheck(Expression input){
 		if  (eq){
 			if (tokenized.size() == 3 && tokenized.at(0).get_type() == Identifier && tokenized.at(2).get_type() == Integer){
 				type = Assignment;
-				//Need to use maps here somehow
+				//Need to use maps
+				map<string,string>::iterator itr = mp.find(tokenized.at(0).get_token());
+				if (itr != mp.end()){ //If we find the token in our map
+					itr->second = tokenized.at(2).get_token();
+				}
+				else{ //If the token is not in our map
+					mp.insert(pair<string,string>(tokenized.at(0).get_token(),tokenized.at(2).get_token()));
 				}
 			}
-			else{
-				valid = false;
-			}
+
 		}
 		else{
-			type = Arithmetic;
-			input.toPostfix();
+			valid = false;
 		}
+	}
+	else{
+		type = Arithmetic;
+		// input.toPostfix();
+		
+	}
 }
 
 
-void Expression::evaluateExpression(){	
-	//Not sure how to do this.
+void Expression::evaluateExpression(){
+	//Need to see if the type is arithmetic or assignment
+	if (type == Arithmetic){
+	}
 }

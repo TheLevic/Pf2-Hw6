@@ -32,7 +32,7 @@ public:
     void displayPostfix();
     void displayInfix();
     void addToExpression(const string input);
-    void syntaxCheck(Expression input);
+    void syntaxCheck();
     void evaluateExpression();
 
 private:
@@ -43,7 +43,7 @@ private:
     bool valid;
     Exp_type type;
     stack<Token> stack;
-    map<Token, Token> mp;
+    map<string, string> mp;
     
 
 
