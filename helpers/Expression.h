@@ -42,7 +42,8 @@ private:
     vector<Token> prefix;
     bool valid;
     Exp_type type;
-    stack<Token> stack;
+    stack<Token> stack1;
+    stack<int> stackInt;
     map<string, string> mp;
     
 
