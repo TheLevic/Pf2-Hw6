@@ -24,7 +24,6 @@ void interactive(){
         getline(cin, input);
         Expression expression;
         expression.set(input);
-        expression.display();
         
         do
             {

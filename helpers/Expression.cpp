@@ -217,21 +217,13 @@ void Expression::syntaxCheck(Expression input){
 	if (pcount != 0){
 		valid = false;
 	}
-	if (state = expect_operand){
+	if (state == expect_operand){
 		valid = false;
 	}
 	if (valid){
 		if  (eq){
 			if (tokenized.size() == 3 && tokenized.at(0).get_type() == Identifier && tokenized.at(2).get_type() == Integer){
 				type = Assignment;
-				//Need to use maps here somehow
-				map<Token, Token>::iterator it = mp.find(tokenized.at(0));
-				if (it != mp.end()){
-					it->second = tokenized.at(2); //Updating the maps value
-				}
-				else{
-					mp.insert(tokenized.at(0),tokenized.at(2)); //Inserting a map
-				}
 			}
 			else{
 				valid = false;
