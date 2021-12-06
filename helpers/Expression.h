@@ -33,6 +33,7 @@ public:
     void displayPrefix();
     void addToExpression(const string input);
     void syntaxCheck();
+    int evaluatePostfix();
 
 private:
     string original;

@@ -242,6 +242,9 @@ void Expression::syntaxCheck(){
 	}
 }
 
+int Expression::evaluatePostfix(){
+
+}
 
 
 
