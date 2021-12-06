@@ -34,12 +34,12 @@ void interactive(){
                 //Need to make sure it starts with num or letter
                 //Need to make sure that the expression is separated by ; properly
                 //Need to make sure that it ends with ;
-                if (isdigit(input[0]) || isalpha(input[0])){ //Update this loop later (or make a check method)
+                if ((isdigit(input[0]) || isalpha(input[0]) ) && input[input.size() - 1] == ';'){ //Update this loop later (or make a check method)
                     out = true;
                 }
                 else{
                     out = false;
-                    cout << "Incorrect input. Please input a valid expression." << endl;
+                    cout << "Incorrect input. Please input a valid expression (Make sure you have ; at the end)" << endl;
                     input.clear();
                     getline(cin, input);
                 }
@@ -58,7 +58,23 @@ void interactive(){
                 return;
             }
             else if (input2.size() == 1 && input2[0] == 'c'){ //Done
+                cout << "input: ";
                 getline(cin, input);
+                do
+            {
+                //Need to make sure it starts with num or letter
+                //Need to make sure that the expression is separated by ; properly
+                //Need to make sure that it ends with ;
+                if ((isdigit(input[0]) || isalpha(input[0]) ) && input[input.size() - 1] == ';'){ //Update this loop later (or make a check method)
+                    out = true;
+                }
+                else{
+                    out = false;
+                    cout << "Incorrect input. Please input a valid expression (Make sure you have ; at the end)" << endl;
+                    input.clear();
+                    getline(cin, input);
+                }
+            } while (out == false);
                 expressions.push_back(input);
                 count++;
             }
