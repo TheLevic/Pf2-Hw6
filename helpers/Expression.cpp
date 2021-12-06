@@ -241,14 +241,14 @@ void Expression::syntaxCheck(){
 	}
 	else{
 		type = Arithmetic;
-		// input.toPostfix();
-		
 	}
 }
 
 
 void Expression::evaluateExpression(){
 	//Need to see if the type is arithmetic or assignment
+	//If it is arithmetic, need to loop through and do each of the operations
+	//If it is assignment, need to go through and use map to do the operations
 	if (type == Arithmetic){
 	}
 }
