@@ -24,6 +24,7 @@ void interactive(){
         getline(cin, input);
         Expression expression;
         expression.set(input);
+        expression.syntaxCheck();
         
         do
             {
@@ -56,7 +57,6 @@ void interactive(){
             else if (input2.size() == 1 && input2[0] == 'c'){ //Able to add to expression. Need to postfix one at a time though. Need to separate these somehow.
                 getline(cin, input);
                 expression.addToExpression(input);
-                expression.display();
 
             }
             else if (input2.size() == 1 && input2[0] == 's'){ //Done

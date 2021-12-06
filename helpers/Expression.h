@@ -33,7 +33,6 @@ public:
     void displayInfix();
     void addToExpression(const string input);
     void syntaxCheck();
-    void evaluateExpression();
 
 private:
     string original;
