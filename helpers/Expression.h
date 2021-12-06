@@ -27,10 +27,10 @@ public:
     vector<Token> get_tokenized() const; //Done
     
     void toPostfix();
-    void toInfix();
+    void toPrefix();
     void clearWorkingTree();
     void displayPostfix();
-    void displayInfix();
+    void displayPrefix();
     void addToExpression(const string input);
     void syntaxCheck();
 
@@ -38,7 +38,7 @@ private:
     string original;
     vector<Token> tokenized; //Infix
     vector<Token> postfix;
-    vector<Token> infix;
+    vector<Token> prefix;
     bool valid;
     Exp_type type;
     stack<Token> stack;

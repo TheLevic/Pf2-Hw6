@@ -132,26 +132,24 @@ void Expression::toPostfix(){ //Not completely working yet
 
 }
 
-void Expression::toInfix(){
+void Expression::toPrefix(){
 	postfix.clear();
-	infix.clear();
+	prefix.clear();
 	toPostfix();
 	reverse(postfix.begin(), postfix.end());
-	infix = postfix;
+	prefix = postfix;
 }
 
 
 void Expression::displayPostfix(){
-	cout << "Your postfix expression is: ";
 	for (int i = 0; i < postfix.size(); i++){
 		cout << postfix.at(i).get_token();
 	}
 	cout << endl;
 }
-void Expression::displayInfix(){
-	cout << "Your infix expression is: ";
-	for (int i = 0; i < infix.size(); i++){
-		cout << infix.at(i).get_token();
+void Expression::displayPrefix(){
+	for (int i = 0; i < prefix.size(); i++){
+		cout << prefix.at(i).get_token();
 	}
 	cout << endl;
 }

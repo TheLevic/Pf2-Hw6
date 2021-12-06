@@ -17,14 +17,17 @@ void interactive(){
     string input; //Users expressions
     string input2; //Users action
     bool out; //Bool to get correct expression
+    Expression expression;
+    vector<Expression> expressions; //Able to keep creating expressions
 
     //Main Loop
     while (1){
+        int count = 0;
         cout << "input:";
         getline(cin, input);
-        Expression expression;
         expression.set(input);
-        expression.syntaxCheck();
+        expressions.push_back(expression);
+        expressions.at(count).syntaxCheck(); //Does syntax check each time we create a new expression
         
         do
             {
@@ -54,14 +57,14 @@ void interactive(){
             if (input2.size() == 1 && input2[0] == 'q'){ //Done
                 return;
             }
-            else if (input2.size() == 1 && input2[0] == 'c'){ //Able to add to expression. Need to postfix one at a time though. Need to separate these somehow.
+            else if (input2.size() == 1 && input2[0] == 'c'){ //Done
                 getline(cin, input);
-                expression.addToExpression(input);
-
+                expressions.push_back(input);
+                count++;
             }
             else if (input2.size() == 1 && input2[0] == 's'){ //Done
                 cout << "Starting fresh!" << endl;
-                expression.clearWorkingTree();
+                expressions.clear();
                 break;
             }
             else if(input2.size() == 1 && input2[0] == 'f'){
@@ -71,12 +74,20 @@ void interactive(){
                 cout << "Insert method to actually evaluate each expression" << endl; //Very confused
             }
             else if(input2.size() == 1 && input2[0] == '>'){ //Working
-                expression.toInfix();
-                expression.displayInfix();
+                for (int i = 0; i < expressions.size(); i++){
+                    expressions.at(i).toPrefix();
+                    cout << "Prefix of " << expressions.at(i).getoriginal() << " is ";
+                    expressions.at(i).displayPrefix();
+                    cout << endl;
+                }
             }
             else if (input2.size() == 1 && input2[0] == '<'){ //Working
-                expression.toPostfix();
-                expression.displayPostfix();
+                for (int i = 0; i < expressions.size(); i++){
+                    expressions.at(i).toPostfix();
+                    cout << "Postfix of " << expressions.at(i).getoriginal() << " is ";
+                    expressions.at(i).displayPostfix();
+                    cout << endl;
+                }
             }
             else{ //Covers all other input possible. Only inputs that will actually run methods are the ones listed above
                 cout << "Wrong input for the action! Please type one of =, <, >, f(F), q(Q), c(C), s(S)" << endl;
