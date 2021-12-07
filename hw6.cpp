@@ -28,7 +28,6 @@ void interactive(){
         expression.set(input);
         expressions.push_back(expression);
         expressions.at(count).syntaxCheck(); //Does syntax check each time we create a new expression
-        
         do
             {
                 //Need to make sure it starts with num or letter
@@ -45,15 +44,10 @@ void interactive(){
                 }
             } while (out == false);
 
-
-
-        //cout << "Echo input : in quote " << "\"" << input << "\"" << endl;
         while (1) {
             cout << "action:";
             getline(cin, input2);
             
-            
-            //cout << "Echo action : in quote " << "\"" << input << "\"" << endl;
             if (input2.size() == 1 && input2[0] == 'q'){ //Done
                 return;
             }
@@ -77,6 +71,7 @@ void interactive(){
             } while (out == false);
                 expressions.push_back(input);
                 count++;
+                expressions.at(count).syntaxCheck(); //Perform a syntax check to see what the user's input was
             }
             else if (input2.size() == 1 && input2[0] == 's'){ //Done
                 cout << "Starting fresh!" << endl;

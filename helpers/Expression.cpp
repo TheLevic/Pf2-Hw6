@@ -1,5 +1,6 @@
 #include "Expression.h"
 #include "Token.h"
+#include <stack>
 
 
 Expression::Expression()
@@ -132,7 +133,7 @@ void Expression::toPostfix(){ //Not completely working yet
 
 }
 
-void Expression::toPrefix(){
+void Expression::toPrefix(){ //This method is wrong
 	postfix.clear();
 	prefix.clear();
 	toPostfix();
@@ -241,6 +242,53 @@ void Expression::syntaxCheck(){
 		type = Arithmetic;
 	}
 }
+
+void Expression::evaluate(){
+	//Clearing the stack
+	if (!stack1.empty()){
+		for (int i = 0; i < stack1.size(); i++){
+			stack1.pop();
+		}
+	}
+	//What do we do if it is a perentheses?
+	//Need to read through each of the tokens
+	for (int i = 0; i < postfix.size(); i++){
+		if (postfix.at(i).get_type() == Identifier || postfix.at(i).get_type() == Integer){
+			//If Token is an int or identifier, need to push onto stack
+			stack1.push(postfix.at(i).get_token());
+		}
+		else if (postfix.at(i).get_type() == Operators){
+			/* 
+			1. Need to pop the top two off of the stack
+			2. Need to apply the operation using an if statement?
+			 */
+			int a;
+			int b;
+			int tmp;
+			string tmp2;
+			a = stoi(stack1.top().get_token()); 
+			stack1.pop();
+			b = stoi(stack1.top().get_token());
+			stack1.pop();
+			if (tokenized.at(i).get_token() == "+"){
+				tmp = b + a;
+			}
+			else if (tokenized.at(i).get_token() == "-"){
+				tmp = b - a;
+			}
+			else if (tokenized.at(i).get_token() == "*"){
+				tmp = b * a;
+			}
+			else { //Division case
+				tmp = b / a;
+			}
+			tmp2 = to_string(a); //Can't be an int, has to be a "Token"
+			stack1.push(tmp2);
+		}
+	}
+	//Not sure what I need to do here. We should have values left of the stack that we need to evaluate.
+}
+
 
 
 
