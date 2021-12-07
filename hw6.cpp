@@ -82,7 +82,12 @@ void interactive(){
                 cout << "Insert method here to fully parenthesize expression" << endl; //Confused
             }
             else if(input2.size() == 1 && input2[0] == '='){
-                cout << "Insert method to actually evaluate each expression" << endl; //Very confused
+                for (int i = 0; i < expressions.size(); i++){
+                    cout << expressions.at(i).getoriginal() << " = ";
+                    expressions.at(i).toPostfix();
+                    expressions.at(i).evaluate();
+                }
+                
             }
             else if(input2.size() == 1 && input2[0] == '>'){ //Working
                 for (int i = 0; i < expressions.size(); i++){

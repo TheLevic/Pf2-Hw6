@@ -1,6 +1,5 @@
 #include "Expression.h"
 #include "Token.h"
-#include <stack>
 
 
 Expression::Expression()
@@ -270,23 +269,24 @@ void Expression::evaluate(){
 			stack1.pop();
 			b = stoi(stack1.top().get_token());
 			stack1.pop();
-			if (tokenized.at(i).get_token() == "+"){
+			if (postfix.at(i).get_token() == "+"){
 				tmp = b + a;
 			}
-			else if (tokenized.at(i).get_token() == "-"){
+			else if (postfix.at(i).get_token() == "-"){
 				tmp = b - a;
 			}
-			else if (tokenized.at(i).get_token() == "*"){
+			else if (postfix.at(i).get_token() == "*"){
 				tmp = b * a;
 			}
 			else { //Division case
 				tmp = b / a;
 			}
-			tmp2 = to_string(a); //Can't be an int, has to be a "Token"
+			tmp2 = to_string(tmp); //Can't be an int, has to be a string
 			stack1.push(tmp2);
 		}
 	}
 	//Not sure what I need to do here. We should have values left of the stack that we need to evaluate.
+	cout << stack1.top().get_token() << endl;
 }
 
 
