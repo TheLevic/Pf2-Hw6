@@ -195,12 +195,10 @@ void Expression::syntaxCheck(){
 					}
 				}
 				else if (t.get_type() == EqualSign){
-					cout << "I see an equals sign" << endl;
 					eqtrue = true;
 					state = expect_operand;
 				}
 				else if (t.get_type() == Operators){
-					cout << "I see an operator!" << endl;
 					state = expect_operand;
 				}
 				else{
@@ -209,7 +207,6 @@ void Expression::syntaxCheck(){
 				}
 				break;
 			default:
-				cout << "Should not have reached here!";
 				break;
 		}
 		i++;
@@ -224,7 +221,6 @@ void Expression::syntaxCheck(){
 		if (eqtrue){
 			if (tokenized.size() == 3 && tokenized.at(0).get_type() == Identifier && tokenized.at(2).get_type() == Integer){
 				type = Assignment;
-				cout << "Assignment" << endl;
 				//Use maps
 			}
 			else{
@@ -233,7 +229,6 @@ void Expression::syntaxCheck(){
 		}
 		else{
 			type = Arithmetic;
-			cout << "Arithmatic" << endl;
 		}
 	}
 }

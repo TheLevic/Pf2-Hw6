@@ -24,9 +24,6 @@ void interactive(){
         
         cout << "input:";
         getline(cin, input);
-        expressions.push_back(input);
-        expressions.at(count).syntaxCheck(); //Does syntax check each time we create a new expression
-        expressions.at(count).display();
         do
             {
                 //Need to make sure it starts with num or letter
@@ -42,6 +39,8 @@ void interactive(){
                     getline(cin, input);
                 }
             } while (out == false);
+        expressions.push_back(input);
+        expressions.at(count).syntaxCheck(); //Does syntax check each time we create a new expression
 
         while (1) {
             cout << "action:";
@@ -71,9 +70,6 @@ void interactive(){
             else if(input2.size() == 1 && input2[0] == '='){
 
                 for (int i = 0; i < expressions.size(); i++){
-
-                    cout << expressions.at(i).getType() << endl;
-                    cout << expressions.at(i).getValid() << endl;
 
                     if (expressions.at(i).getType() == Assignment){
                         cout << "I couldn't get it to set variables. Explanation in homework report" << endl;
