@@ -14,20 +14,19 @@ using namespace std;
 
 void interactive(){
     //Declarations
+    int count = 0;
     string input; //Users expressions
     string input2; //Users action
     bool out; //Bool to get correct expression
-    Expression expression;
     vector<Expression> expressions; //Able to keep creating expressions
-
     //Main Loop
     while (1){
-        int count = 0;
+        
         cout << "input:";
         getline(cin, input);
-        expression.set(input);
-        expressions.push_back(expression);
+        expressions.push_back(input);
         expressions.at(count).syntaxCheck(); //Does syntax check each time we create a new expression
+        expressions.at(count).display();
         do
             {
                 //Need to make sure it starts with num or letter
@@ -52,27 +51,11 @@ void interactive(){
                 return;
             }
             else if (input2.size() == 1 && input2[0] == 'c'){ //Done
-                cout << "input: ";
-                getline(cin, input);
-                do
-            {
-                //Need to make sure it starts with num or letter
-                //Need to make sure that the expression is separated by ; properly
-                //Need to make sure that it ends with ;
-                if ((isdigit(input[0]) || isalpha(input[0]) ) && input[input.size() - 1] == ';'){ //Update this loop later (or make a check method)
-                    out = true;
-                }
-                else{
-                    out = false;
-                    cout << "Incorrect input. Please input a valid expression (Make sure you have ; at the end)" << endl;
-                    input.clear();
-                    getline(cin, input);
-                }
-            } while (out == false);
-                expressions.push_back(input);
                 count++;
-                expressions.at(count).syntaxCheck(); //Perform a syntax check to see what the user's input was
+                break;
             }
+
+
             else if (input2.size() == 1 && input2[0] == 's'){ //Done
                 cout << "Starting fresh!" << endl;
                 expressions.clear();
@@ -86,10 +69,28 @@ void interactive(){
                 }
             }
             else if(input2.size() == 1 && input2[0] == '='){
+
                 for (int i = 0; i < expressions.size(); i++){
-                    expressions.at(i).toPostfix();
-                    cout << expressions.at(i).getoriginal() << " = ";
-                    expressions.at(i).evaluate();
+
+                    cout << expressions.at(i).getType() << endl;
+                    cout << expressions.at(i).getValid() << endl;
+
+                    if (expressions.at(i).getType() == Assignment){
+                        cout << "I couldn't get it to set variables. Explanation in homework report" << endl;
+                    }
+
+                    else if (expressions.at(i).getValid() == true){
+                        expressions.at(i).toPostfix();
+                        cout << expressions.at(i).getoriginal() << " = ";
+                        expressions.at(i).evaluate();
+                    }
+
+                    
+                    
+                    else if (expressions.at(i).getValid() == false){
+                        cout << "Can't evaluate BAD expression" << endl;
+                    } 
+                    
                 
                 }
                 

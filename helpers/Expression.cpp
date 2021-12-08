@@ -166,7 +166,88 @@ void Expression::clearWorkingTree(){
 }
 
 void Expression::syntaxCheck(){
-	enum States {expect_operand, expect_operator, done};
+	bool eqtrue = false; // set to true if = is encountered
+	States state = expect_operand; // initial state value
+	int pcount = 0; // for checking braces
+	valid = true; // a field in Expression class
+	int i = 0; //For our while loop
+	while (state != done && i < tokenized.size()){
+		Token t = tokenized.at(i); //Letting t == next token
+		switch (state){
+			case expect_operand:
+				if (t.get_type() == OpenBrace){
+					pcount++;
+				}
+				else if (t.get_type() == Integer || t.get_type() == Identifier){
+					state = expect_operator;
+				}
+				else{ //Invalid
+					valid = false;
+					state = done;
+				}
+				break;
+			case expect_operator:
+				if (t.get_type() == CloseBrace){
+					pcount--;
+					if (pcount < 0){
+						valid = false;
+						state = done;
+					}
+				}
+				else if (t.get_type() == EqualSign){
+					cout << "I see an equals sign" << endl;
+					eqtrue = true;
+					state = expect_operand;
+				}
+				else if (t.get_type() == Operators){
+					cout << "I see an operator!" << endl;
+					state = expect_operand;
+				}
+				else{
+					valid = false;
+					state = done;
+				}
+				break;
+			default:
+				cout << "Should not have reached here!";
+				break;
+		}
+		i++;
+	}
+	if (pcount != 0){
+		valid = false;
+	}
+	if (state == expect_operand){
+		valid = false;
+	}
+	if (valid){
+		if (eqtrue){
+			if (tokenized.size() == 3 && tokenized.at(0).get_type() == Identifier && tokenized.at(2).get_type() == Integer){
+				type = Assignment;
+				cout << "Assignment" << endl;
+				//Use maps
+			}
+			else{
+				valid = false;
+			}
+		}
+		else{
+			type = Arithmetic;
+			cout << "Arithmatic" << endl;
+		}
+	}
+}
+
+bool Expression::getValid(){
+	return valid;
+}
+
+Exp_type Expression::getType(){
+	return type;
+}
+
+
+/* void Expression::syntaxCheck(){
 	bool eq = false; //We will set this to true if we encounter an equal sign
 	States state = expect_operand;
 	int pcount = 0;
@@ -185,6 +266,7 @@ void Expression::syntaxCheck(){
 				else{
 					valid = false;
 					state = done;
+					type = Bad;
 				}
 				break;
 			case expect_operator:
@@ -193,6 +275,7 @@ void Expression::syntaxCheck(){
 					if (pcount < 0){
 						valid = false;
 						state = done;
+						type = Bad;
 					}
 				}
 				else if (t.get_type() == EqualSign){
@@ -205,6 +288,7 @@ void Expression::syntaxCheck(){
 				else{
 					valid = false;
 					state = done;
+					type = Bad;
 				}
 			default:
 				break;
@@ -212,9 +296,11 @@ void Expression::syntaxCheck(){
 	}
 	if (pcount != 0){
 		valid = false;
+		type = Bad;
 	}
 	if (state == expect_operand){
 		valid = false;
+		type = Bad;
 	}
 	if (valid){
 		if  (eq){
@@ -233,12 +319,13 @@ void Expression::syntaxCheck(){
 		}
 		else{
 			valid = false;
+			type = Bad;
 		}
 	}
 	else{
 		type = Arithmetic;
 	}
-}
+} */
 
 void Expression::evaluate(){
 	//Clearing the stack
@@ -338,10 +425,6 @@ void Expression::evaluate(){
 		}
 	}
 	cout << stack1.top().get_token() << endl;
-}
-
-Exp_type Expression::getType(){
-	return type;
 }
 
 

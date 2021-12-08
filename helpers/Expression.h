@@ -12,6 +12,7 @@
 using namespace std;
 
 enum Exp_type {Assignment, Arithmetic, Bad};
+enum States {expect_operand, expect_operator, done};
 
 class Expression{
 
@@ -35,6 +36,7 @@ public:
     void syntaxCheck();
     void evaluate();
     void fullyParenth();
+    bool getValid();
     Exp_type getType();
 
 
