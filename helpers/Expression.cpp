@@ -97,7 +97,7 @@ vector<Token> Expression::get_tokenized() const
 	return tokenized;
 }
 
-void Expression::toPostfix(){ //Not completely working yet
+void Expression::toPostfix(){ 
 	if (!stack1.empty()){
 		for (int i = 0; i < stack1.size(); i++){
 			stack1.pop();
@@ -281,11 +281,9 @@ void Expression::evaluate(){
 			}
 			tmp2 = to_string(tmp); //Can't be an int, has to be a string
 			stack1.push(tmp2);
-			cout << "Postfix = ";
-			displayPostfix();
-			cout << endl;
 		}
 	}
+	//Not sure what I need to do here. We should have values left of the stack that we need to evaluate.
 	cout << stack1.top().get_token() << endl;
 }
 
