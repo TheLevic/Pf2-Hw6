@@ -165,13 +165,6 @@ void Expression::clearWorkingTree(){
 	postfix.clear();
 }
 
-void Expression::addToExpression(const string input){
-	tokenized.clear();
-	string tmp = original + input;
-	cout << tmp << endl;
-	set(tmp);
-}
-
 void Expression::syntaxCheck(){
 	enum States {expect_operand, expect_operator, done};
 	bool eq = false; //We will set this to true if we encounter an equal sign
@@ -349,6 +342,9 @@ void Expression::evaluate(){
 	cout << stack1.top().get_token() << endl;
 }
 
+Exp_type Expression::getType(){
+	return type;
+}
 
 
 

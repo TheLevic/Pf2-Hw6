@@ -35,6 +35,7 @@ public:
     void syntaxCheck();
     void evaluate();
     void fullyParenth();
+    Exp_type getType();
 
 
 private:

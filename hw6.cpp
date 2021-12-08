@@ -85,9 +85,13 @@ void interactive(){
             }
             else if(input2.size() == 1 && input2[0] == '='){
                 for (int i = 0; i < expressions.size(); i++){
-                    cout << expressions.at(i).getoriginal() << " = ";
-                    expressions.at(i).toPostfix();
-                    expressions.at(i).evaluate();
+                    if (expressions.at(i).getType() == Arithmetic){
+                        cout << expressions.at(i).getoriginal() << " = ";
+                        expressions.at(i).evaluate();
+                    }
+                    else{
+                        break;
+                    }
                 }
                 
             }
