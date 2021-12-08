@@ -34,12 +34,15 @@ public:
     void addToExpression(const string input);
     void syntaxCheck();
     void evaluate();
+    void fullyParenth();
+
 
 private:
     string original;
     vector<Token> tokenized; //Infix
     vector<Token> postfix;
     vector<Token> prefix;
+    vector<Token> parenthesized;
     bool valid;
     Exp_type type;
     stack<Token> stack1;

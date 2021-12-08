@@ -98,6 +98,11 @@ vector<Token> Expression::get_tokenized() const
 }
 
 void Expression::toPostfix(){ //Not completely working yet
+	if (!stack1.empty()){
+		for (int i = 0; i < stack1.size(); i++){
+			stack1.pop();
+		}
+	}
 	postfix.clear();
 	for (int i = 0; i < tokenized.size(); i++){ //For each token in tokenized
 
@@ -283,9 +288,64 @@ void Expression::evaluate(){
 			}
 			tmp2 = to_string(tmp); //Can't be an int, has to be a string
 			stack1.push(tmp2);
+			cout << "Postfix = ";
+			displayPostfix();
+			cout << endl;
 		}
 	}
-	//Not sure what I need to do here. We should have values left of the stack that we need to evaluate.
+	cout << stack1.top().get_token() << endl;
+}
+
+ void Expression::fullyParenth(){
+	 parenthesized.clear();
+	 if (!stack1.empty()){
+		 for (int i = 0; i < stack1.size(); i++){
+			 stack1.pop();
+		 }
+	 }
+	/* 
+	1. Push operands to stack
+	2. Once we find an operator, pop 2 off of the stack and add them to the vector
+	3. Add parentheses around the expression
+	4. repeat until finished
+	5. return stack.top()
+	6. stack.pop()
+	 */
+	for (int i = 0; i < postfix.size(); i++){
+		parenthesized.clear();
+		if (postfix.at(i).get_type() == Identifier || postfix.at(i).get_type() == Integer){
+			stack1.push(postfix.at(i).get_token()); //Pusing integers and Identifiers
+		}
+		else if (postfix.at(i).get_type() == Operators){ 
+			string a;
+			string b;
+			string open = "(";
+			string close = ")";
+			string tmp;
+			if (tmp.empty()){
+				a = stack1.top().get_token();
+				stack1.pop();
+				b = stack1.top().get_token();
+				stack1.pop();
+				parenthesized.push_back(a); //Inserting int
+				parenthesized.insert(parenthesized.begin(), postfix.at(i).get_token()); //Inserting operator
+				parenthesized.insert(parenthesized.begin(),b); //Inserting int
+			}
+			else{
+				a = stack1.top().get_token();
+				stack1.pop();
+				parenthesized.insert(parenthesized.begin(),postfix.at(i).get_token()); //Inserting operator first
+				parenthesized.insert(parenthesized.begin(),a); //inserting operand
+			}
+			//Insert parentheses
+			parenthesized.push_back(close);
+			parenthesized.insert(parenthesized.begin(),open);
+			for (int i = 0; i < parenthesized.size(); i++){
+				tmp+= parenthesized.at(i).get_token();
+			}
+			stack1.push(tmp);
+		}
+	}
 	cout << stack1.top().get_token() << endl;
 }
 

@@ -80,6 +80,8 @@ void interactive(){
             }
             else if(input2.size() == 1 && input2[0] == 'f'){
                 cout << "Insert method here to fully parenthesize expression" << endl; //Confused
+                expressions.at(0).toPostfix();
+                expressions.at(0).fullyParenth();
             }
             else if(input2.size() == 1 && input2[0] == '='){
                 for (int i = 0; i < expressions.size(); i++){
